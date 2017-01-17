@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd 
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+    
+
+    <!-- 常用bean -->
+    <bean name="util" class="util.Util" parent="baseDao"></bean>
+    <bean name="xwdao" class="com.admin.html.Xwdao"></bean>
+    <!-- dao -->
+        <bean name="menuDao" class="com.admin.menu.dao.impl.MenuDaoImpl" parent="baseDao"></bean>
+        <bean name="columnDao" class="com.admin.menu.dao.impl.ColumnDaoImpl" parent="baseDao"></bean>
+        <bean name="soncolumnDao" class="com.admin.menu.dao.impl.SoncolumnDaoImpl" parent="baseDao"></bean>
+        <bean name="journalismDao" class="com.admin.menu.dao.impl.JournalismDaoImpl" parent="baseDao"></bean>
+    	
+    <!-- service -->
+    <bean name="menuService" class="com.admin.menu.service.impl.MenuServiceImpl">
+    <property name="menuDao" ref="menuDao"></property>
+    </bean>
+    <bean name="columnService" class="com.admin.menu.service.impl.ColumnServiceImpl">
+    <property name="columnDao" ref="columnDao"></property>
+    </bean>
+    <bean name="soncolumnService" class="com.admin.menu.service.impl.SoncolumnServiceImpl">
+    <property name="soncolumnDao" ref="soncolumnDao"></property>
+    </bean>
+    <bean name="journalismService" class="com.admin.menu.service.impl.JournalismServiceImpl">
+    <property name="journalismDao" ref="journalismDao"></property>
+    </bean>
+    
+    <!-- action  -->
+    <bean name="menuaction" class="com.admin.menu.action.MenuAction">
+    <property name="util" ref="util"></property>
+    <property name="menuService" ref="menuService"></property>
+    <property name="columnService" ref="columnService"></property>
+    <property name="soncolumnService" ref="soncolumnService"></property>
+    <property name="journalismService" ref="journalismService"></property>
+    </bean>
+    
+    	<bean name="upload" class="com.admin.menu.action.UploadImgServlet"></bean>
+    	
+     <bean name="loginaction" class="com.admin.menu.action.LoginAction">
+    </bean>
+    <bean name="menuajax" class="com.admin.menu.ajax.MenuAjax">
+    <property name="menuService" ref="menuService"></property>
+    <property name="columnService" ref="columnService"></property>
+    <property name="soncolumnService" ref="soncolumnService"></property>
+    </bean>
+    <bean name="xwhtml" class="com.admin.menu.ajax.XwHtmlAjax">
+    <property name="dao" ref="xwdao"></property>
+    </bean>
+    <bean name="xwget" class="com.admin.menu.ajax.XwGethtml">
+    <property name="menuService" ref="menuService"></property>
+    <property name="dao" ref="xwdao"></property>
+    
+    </bean>
+    
+</beans>

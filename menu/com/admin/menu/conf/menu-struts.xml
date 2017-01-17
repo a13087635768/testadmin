@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+<package name="menuaction" extends="struts-default">
+ 	<action name="menu_*" class="menuaction" method="{1}">
+
+  		<result name="zyyw">/zyyw.jsp</result>
+  	</action>
+  	
+  	
+  	<action name="login_*" class="loginaction" method="{1}">
+  		<result name="index">/index.jsp</result>
+  		<result name="login">/login.jsp</result>
+  		<result name="zyyw" type="chain">menu_zyyw</result>
+  	</action>
+  	
+  	<action name="upload" class="upload" method="execute"></action>
+	<action name="menuajax_*" class="menuajax" method="{1}"></action>
+	
+	<action name="xwhtml_*" class="xwhtml" method="{1}"></action>
+	<action name="xwget_*" class="xwget" method="{1}"></action>
+</package>
+ 	
+    
+	
+
+</struts>
